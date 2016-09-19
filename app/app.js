@@ -5,10 +5,10 @@ var HelloUser = React.createClass({
 	render: function() {
 		return (
 			<div>
-				HelloWorld!
+				HelloUser!
 			</div>
 		)
 	}
 });
 
-ReactDOM.render(<HelloWorld />, document.getElementById('app'));
+ReactDOM.render(<HelloUser />, document.getElementById('app'));
