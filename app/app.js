@@ -10,7 +10,7 @@ var ReactDOM = require('react-dom');
 var ProfilePic = React.createClass({
 	render: function() {
 		return (
-			<div className="user-image">
+			<div className="col-md-12 user-image">
 			 	<img className="picture" src={this.props.imageUrl} />
 		 	</div>
 		 )
@@ -22,23 +22,22 @@ var ProfileLink = React.createClass({
 		console.log("getInitialState");
 
 		return {
-			rest_data: ""	
+			name: "",
+			temp: "",
+			humi: ""
 		};		
 	},
 
 	componentDidMount: function() {
-		console.log("componentDidMount");
-
-		this.serverRequest = $.get("https://jsonplaceholder.typicode.com/posts", function(result) {
-			var first_object = result[0];
-
-			console.log("first_object: " + first_object.title);
+		this.serverRequest = $.get("http://localhost:8080/SmartHome-1.0/api/room_values", function(result) {
+			console.log(result);
+			var values = result;
 			this.setState({
-				rest_data: first_object
+				name: values.name,
+				temp: values.temp,
+				humi: values.humi
 			});
 		}.bind(this));
-
-		console.log("end of componentDidMount");
 	},
 
 	componentWillUnmount: function() {
@@ -48,16 +47,14 @@ var ProfileLink = React.createClass({
 	},
 
 	render: function() {
-		console.log("render: " + this.state.rest_data);
-		
 		return (
-			<div className="user-link">
+			<div className="col-md-7 user-link">
 				<a href={'https://github.com/' + this.props.username}>
 					Github profile
 				</a>
 				<br />
 
-				{this.state.rest_data.title}
+				{this.state.name}: teplota {this.state.temp} C, vlhkost: {this.state.humi} %
 			</div>
 		)
 	}
@@ -66,23 +63,22 @@ var ProfileLink = React.createClass({
 var ProfileName = React.createClass({
 	getInitialState: function() {
 		return {
-			hausy_rules: ""
+			hausy_rules: "",
+			items: ""
 		};
 	},
 
 	componentDidMount: function() {
-		this.serverRequest = $.get("http://mydomain.cz:8080/SmartHome-1.0/api/rules", function(result) {
+		this.serverRequest = $.get("http://localhost:8080/SmartHome-1.0/api/rules", function(result) {
 			console.log(result);
-			console.log("test: " + result.evaluationNodeTitle);
-			console.log("test: " + result[0]);
-			console.log("test: " + result[1]);
-			console.log("test: " + result[0].evaluationNodeTitle);
+			console.log("rules: " + result.evaluationNodeTitle);
 		}.bind(this));
+
 	},
 
 	render: function() {
 		return (
-			<div className="user-name">{this.props.name}</div>
+			<div className="col-md-4 col-md-offset-1 user-name">{this.props.name}</div>
 		)
 	}
 });
@@ -90,14 +86,20 @@ var ProfileName = React.createClass({
 var Avatar = React.createClass({
 	render: function() {
 		return (
-			<div> 
+			<div className="container">
+				<div className="row"> 
 
-				<ProfilePic imageUrl={this.props.user.image} />
+					<ProfilePic imageUrl={this.props.user.image} />
 
-				<ProfileLink username={this.props.user.username} />
+				</div>
 
-				<ProfileName name={this.props.user.name} />
+				<div className="row">
 
+					<ProfileLink username={this.props.user.username} />
+
+					<ProfileName name={this.props.user.name} />
+
+				</div>
 			</div>
 		)
 	}
