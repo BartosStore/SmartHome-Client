@@ -8,10 +8,56 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 var ProfilePic = React.createClass({
+		getInitialState: function() {
+		console.log("getInitialState");
+
+		return {
+			name: "",
+			temp: "",
+			humi: ""
+		};		
+	},
+
+	componentDidMount: function() {
+		this.serverRequest = $.get("http://localhost:8080/SmartHome-1.0/api/room_values", function(result) {
+			console.log(result);
+			var values = result;
+			this.setState({
+				name: values.name,
+				temp: values.temp,
+				humi: values.humi
+			});
+		}.bind(this));
+	},	
+
+	componentWillUnmount: function() {
+		console.log("componentWillMount");
+
+		this.serverRequest.abort();
+	},
+
+	render: function() {
+		console.log("state-name: " + this.state.name);
+
+		return (
+			<div className="col-md-8 user-image">
+				
+				<div className="jumbotron">
+			        <h1>{this.props.mainText}</h1>
+			        <p> {this.state.temp} </p>
+			        <PrimaryButton buttonText='Learn more'/>
+			    </div>
+		 	</div>
+		 )
+	}
+});
+
+
+var Dashboard = React.createClass({
 	render: function() {
 		return (
-			<div className="col-md-12 user-image">
-			 	<img className="picture" src={this.props.imageUrl} />
+		 	<div className="col-md-4 dashboard">
+		 		<img className="picture" src={this.props.imageUrl} />
 		 	</div>
 		 )
 	}
@@ -83,13 +129,25 @@ var ProfileName = React.createClass({
 	}
 });
 
+var PrimaryButton = React.createClass({
+  render() {
+    return (
+      <div>
+         <p><a className="btn btn-primary btn-lg" href="#" role="button">{this.props.buttonText}</a></p>
+        </div>
+    )
+  }
+});
+
 var Avatar = React.createClass({
 	render: function() {
 		return (
 			<div className="container">
 				<div className="row"> 
 
-					<ProfilePic imageUrl={this.props.user.image} />
+					<ProfilePic />
+
+					<Dashboard imageUrl={this.props.user.image} />
 
 				</div>
 
