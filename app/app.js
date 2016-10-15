@@ -1,14 +1,14 @@
+var React = require('react');
+var ReactDOM = require('react-dom');
+
 var USER_DATA = {
 	name: 'Miroslav Bartos',
 	username: 'BartosStore',
 	image: 'http://findicons.com/files/icons/1072/face_avatars/300/a02.png'
 };
 
-var React = require('react');
-var ReactDOM = require('react-dom');
-
-var ProfilePic = React.createClass({
-		getInitialState: function() {
+var Dashboard = React.createClass({
+	getInitialState: function() {
 		console.log("getInitialState");
 
 		return {
@@ -40,73 +40,65 @@ var ProfilePic = React.createClass({
 		console.log("state-name: " + this.state.name);
 
 		return (
-			<div className="col-md-8 user-image">
+			<div className="col-md-8 dashboard">
 				
 				<div className="jumbotron">
-			        <h1>{this.props.mainText}</h1>
-			        <p> {this.state.temp} </p>
-			        <PrimaryButton buttonText='Learn more'/>
+			        <h2>{this.props.mainText}</h2>
+			        <p>Přehled teplot a vlhkosti</p>
+		         	<p> {this.state.name}: teplota {this.state.temp} C, vlhkost: {this.state.humi} % </p>
+			        <PrimaryButton buttonText='Upravit vytápění'/>
 			    </div>
+
 		 	</div>
 		 )
 	}
 });
 
-
-var Dashboard = React.createClass({
+var Logger = React.createClass({
 	render: function() {
 		return (
-		 	<div className="col-md-4 dashboard">
+		 	<div className="col-md-4 logger">
+		 		<h2>Logger</h2>
+		 		<p>výpis upozornění</p>
 		 		<img className="picture" src={this.props.imageUrl} />
 		 	</div>
 		 )
 	}
 });
 
-var ProfileLink = React.createClass({
+var Menu = React.createClass({
 	getInitialState: function() {
 		console.log("getInitialState");
 
 		return {
-			name: "",
-			temp: "",
-			humi: ""
+
 		};		
 	},
 
 	componentDidMount: function() {
-		this.serverRequest = $.get("http://localhost:8080/SmartHome-1.0/api/room_values", function(result) {
-			console.log(result);
-			var values = result;
-			this.setState({
-				name: values.name,
-				temp: values.temp,
-				humi: values.humi
-			});
-		}.bind(this));
+
 	},
 
 	componentWillUnmount: function() {
 		console.log("componentWillMount");
 
-		this.serverRequest.abort();
 	},
 
 	render: function() {
 		return (
-			<div className="col-md-7 user-link">
+			<div className="col-md-7 menu">
+				<h2>Menu</h2>
+				<p>Položky menu pro přechod na vytápění, osvětlení apod.</p>
 				<a href={'https://github.com/' + this.props.username}>
 					Github profile
 				</a>
 				<br />
-
-				{this.state.name}: teplota {this.state.temp} C, vlhkost: {this.state.humi} %
 			</div>
 		)
 	}
 });
 
-var ProfileName = React.createClass({
+var Profile = React.createClass({
 	getInitialState: function() {
 		return {
 			hausy_rules: "",
@@ -124,7 +116,11 @@ var ProfileName = React.createClass({
 
 	render: function() {
 		return (
-			<div className="col-md-4 col-md-offset-1 user-name">{this.props.name}</div>
+			<div className="col-md-4 col-md-offset-1 profile">
+				<h2>Profile</h2>
+				<p>Nastavení spjaté s uživatelem.</p>
+				<p>{this.props.name}</p>
+			</div>
 		)
 	}
 });
@@ -145,17 +141,17 @@ var Avatar = React.createClass({
 			<div className="container">
 				<div className="row"> 
 
-					<ProfilePic />
+					<Dashboard mainText='Dashboard' />
 
-					<Dashboard imageUrl={this.props.user.image} />
+					<Logger imageUrl={this.props.user.image} />
 
 				</div>
 
 				<div className="row">
 
-					<ProfileLink username={this.props.user.username} />
+					<Menu username={this.props.user.username} />
 
-					<ProfileName name={this.props.user.name} />
+					<Profile name={this.props.user.name} />
 
 				</div>
 			</div>
