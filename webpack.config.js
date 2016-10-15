@@ -4,14 +4,20 @@ var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 	filename: 'index.html',
 	inject: 'body'
 });
+var path = require('path');
 
 module.exports = {
 	entry: [
-		'./app/app.js'
+		'./app/app.jsx'
 	],
+	resolve: {
+		root: [
+			path.resolve('./app/components')
+		]
+	},
 	module: {
 		loaders: [
-			{test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"}
+			{test: /\.jsx?$/, exclude: /node_modules/, loader: "babel-loader"}
 		]
 	},
 	output: {
