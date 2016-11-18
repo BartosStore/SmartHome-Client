@@ -1,13 +1,13 @@
 var React = require('react');
 
-var StateBar = React.createClass({
+var Heating = React.createClass({
 	render: function() {
 		return (
 		 	<div className="navbar">
-		 		Text
+		 		This is heating!
 		 	</div>
 		 )
 	}
 });
 
-module.exports = StateBar;
+module.exports = Heating;
