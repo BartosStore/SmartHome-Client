@@ -18,7 +18,7 @@ var Profile = React.createClass({
 
 	render: function() {
 		return (
-			<div className="col-md-4 col-md-offset-1 profile">
+			<div className="col-md-4 profile">
 				<h2>Profile</h2>
 				<p>Nastavení spjaté s uživatelem.</p>
 				<p>{this.props.name}</p>

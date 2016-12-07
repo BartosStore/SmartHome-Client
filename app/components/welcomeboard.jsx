@@ -1,7 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var Dashboard = require('./dashboard.jsx');
+var Jumbotron = require('./jumbotron.jsx');
 var Logger = require('./logger.jsx');
 var Menu = require('./menu.jsx');
 var Profile = require('./profile.jsx');
@@ -17,12 +17,8 @@ var Welcomeboard = React.createClass({
 	render: function() {
 		return (
 			<div className="container">
-				<div className="row">
-					<StateBar />
-				</div>
-
 				<div className="row"> 
-					<Dashboard mainText='Dashboard' />
+					<Jumbotron mainText='Jumbotron' />
 
 					<Logger imageUrl={USER_DATA.image} />
 				</div>

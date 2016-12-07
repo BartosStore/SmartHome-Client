@@ -35,15 +35,15 @@ var Jumbotron = React.createClass({
 		console.log("state-name: " + this.state.name);
 
 		return (
-			<div className="col-md-8 jumbotron">
-				
+			<div className="col-md-8 jumbo">
 				<div className="jumbotron">
-		        <h2>{this.props.mainText}</h2>
-		        <p>Přehled teplot a vlhkosti</p>
-	         	<p> {this.state.name}: teplota {this.state.temp} C, vlhkost: {this.state.humi} % </p>
-		        <PrimaryButton buttonText='Upravit vytápění'/>
-			  </div>
+	        <h2>{this.props.mainText}</h2>
 
+	        <p>Přehled teplot a vlhkosti</p>
+         	<p> {this.state.name}: teplota {this.state.temp} C, vlhkost: {this.state.humi} % </p>
+
+	        <PrimaryButton buttonText='Upravit vytápění'/>
+			  </div>
 		 	</div>
 		 )
 	}

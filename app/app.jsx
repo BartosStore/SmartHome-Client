@@ -2,14 +2,10 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var { Router, Route, Link, hashHistory, IndexRoute } = require('react-router');
 
-var Dashboard = require('./components/dashboard.jsx');
-var Logger = require('./components/logger.jsx');
-var Menu = require('./components/menu.jsx');
-var Profile = require('./components/profile.jsx');
-var StateBar = require('./components/stateBar.jsx');
-
-var Heating = require('./components/heating.jsx');
+var Statebar = require('./components/stateBar.jsx');
 var Welcomeboard = require('./components/welcomeboard.jsx');
+var Heating = require('./components/heating.jsx');
+var Lighting = require('./components/lighting.jsx');
 
 var USER_DATA = {
 	name: 'Miroslav Bartos',
@@ -20,31 +16,26 @@ var USER_DATA = {
 var Application = React.createClass({
 	render: function() {
 		return (
-			<div className="container">
-				<ul>
-					<li><a href="./index.html#/welcomeboard">Welcomeboard</a></li>
-					<li><a href="./index.html#/logger">Logger</a></li>
-					<li><a href="./index.html#/heating">Heating</a></li>
-				</ul>
+			<div className="container app">
+				<div className="row">
+					<Statebar />
+				</div>
 
-				{this.props.children}
+				<div className="row">
+					{this.props.children}
+				</div>
 			</div>
 		)
 	}
 });
-
-// ReactDOM.render(<Application />, document.getElementById('app'));
 
 ReactDOM.render(
 	<Router history={hashHistory}>
 		<Route path="/" component={Application}>
 			<IndexRoute component = {Welcomeboard} />
       <Route path="welcomeboard" component={Welcomeboard} />
-      <Route path="profile" component={Profile} />
-      <Route path="logger" component={Logger} />
-      <Route path="stateBar" component={StateBar} />
       <Route path="heating" component={Heating} />
+      <Route path="lighting" component={Lighting} />
     </Route>
 	</Router>, 
 	document.getElementById('app'));
-
