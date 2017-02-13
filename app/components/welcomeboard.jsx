@@ -1,17 +1,11 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var CONSTANTS = require('../constants.jsx');
 
 var Jumbotron = require('./jumbotron.jsx');
 var Logger = require('./logger.jsx');
 var Menu = require('./menu.jsx');
 var Profile = require('./profile.jsx');
-var StateBar = require('./stateBar.jsx');
-
-var USER_DATA = {
-	name: 'Miroslav Bartos',
-	username: 'BartosStore',
-	image: 'http://findicons.com/files/icons/1072/face_avatars/300/a02.png'
-};
 
 var Welcomeboard = React.createClass({
 	render: function() {
@@ -20,13 +14,13 @@ var Welcomeboard = React.createClass({
 				<div className="row"> 
 					<Jumbotron mainText='Jumbotron' />
 
-					<Logger imageUrl={USER_DATA.image} />
+					<Logger imageUrl={CONSTANTS.image} />
 				</div>
 
 				<div className="row">
-					<Menu username={USER_DATA.username} />
+					<Menu username={CONSTANTS.username} />
 
-					<Profile name={USER_DATA.name} />
+					<Profile name={CONSTANTS.name} />
 				</div>
 			</div>
 		)

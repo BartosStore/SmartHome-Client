@@ -1,4 +1,5 @@
 var React = require('react');
+var CONSTANTS = require('../constants.jsx');
 
 var PrimaryButton = require('primaryButton.jsx');
 
@@ -14,7 +15,9 @@ var Jumbotron = React.createClass({
 	},
 
 	componentDidMount: function() {
-		this.serverRequest = $.get("http://localhost:8080/SmartHome-1.0/api/room_values", function(result) {
+		console.log('componentDidMount -> URL: ' + CONSTANTS.URL + 'room_values');
+
+		this.serverRequest = $.get(CONSTANTS.URL + "room_values", function(result) {
 			console.log(result);
 			var values = result;
 			this.setState({

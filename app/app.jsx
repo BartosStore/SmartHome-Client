@@ -7,11 +7,7 @@ var Welcomeboard = require('./components/welcomeboard.jsx');
 var Heating = require('./components/heating.jsx');
 var Lighting = require('./components/lighting.jsx');
 
-var USER_DATA = {
-	name: 'Miroslav Bartos',
-	username: 'BartosStore',
-	image: 'http://findicons.com/files/icons/1072/face_avatars/300/a02.png'
-};
+var LoginPage = require('./components/loginPage.jsx');
 
 var Application = React.createClass({
 	render: function() {
@@ -36,6 +32,8 @@ ReactDOM.render(
       <Route path="welcomeboard" component={Welcomeboard} />
       <Route path="heating" component={Heating} />
       <Route path="lighting" component={Lighting} />
+
+      <Route path="login" component={LoginPage} />
     </Route>
 	</Router>, 
 	document.getElementById('app'));
