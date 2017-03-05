@@ -15,16 +15,20 @@ var Jumbotron = React.createClass({
 	},
 
 	componentDidMount: function() {
-		console.log('componentDidMount -> URL: ' + CONSTANTS.URL + 'room_values');
+		console.log('componentDidMount -> URL: ' + CONSTANTS.URL_HTTPS_ROOM);
 
-		this.serverRequest = $.get(CONSTANTS.URL + "room_values", function(result) {
+		this.serverRequest = $.get(CONSTANTS.URL_HTTPS_ROOM_VALUES, function(result) {
 			console.log(result);
-			var values = result;
+
 			this.setState({
-				name: values.name,
-				temp: values.temp,
-				humi: values.humi
+				name: result.name,
+				temp: result.temp,
+				humi: result.humi
 			});
+
+			console.log('name: ' + result.name);
+			console.log('temp: ' + result.temp);
+
 		}.bind(this));
 	},	
 

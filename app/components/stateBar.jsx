@@ -5,7 +5,7 @@ var StateBar = React.createClass({
 		return (
 		 	<div className="statebar">
 		 		<ul>
-					<li><a href="./index.html#/welcomeboard">Welcomeboard</a></li>
+					<li><a href="./index.html#/">Welcomeboard</a></li>
 					<li><a href="./index.html#/heating">Heating</a></li>
 					<li><a href="./index.html#/lighting">Lighting</a></li>
 

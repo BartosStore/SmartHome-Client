@@ -1,4 +1,5 @@
 var React = require('react');
+var CONSTANTS = require('../constants.jsx');
 
 var Profile = React.createClass({
 	getInitialState: function() {
@@ -9,8 +10,10 @@ var Profile = React.createClass({
 	},
 
 	componentDidMount: function() {
-		this.serverRequest = $.get("http://localhost:8080/SmartHome-1.0/api/rules", function(result) {
+		this.serverRequest = $.get(CONSTANTS.URL_HTTPS_RULES, function(result) {
+			console.log("result1");
 			console.log(result);
+			console.log("result2");
 			console.log("rules: " + result.evaluationNodeTitle);
 		}.bind(this));
 
