@@ -1,4 +1,6 @@
 var React = require('react');
+var Router = require('react-router');
+
 var CONSTANTS = require('../constants.jsx');
 
 var ReactFormLabel = React.createClass({
@@ -11,78 +13,106 @@ var ReactFormLabel = React.createClass({
 
 var LoginPage = React.createClass({
 	getInitialState: function () {
+    window.sessionStorage.setItem("token", "");
+
 		return {
       name: '',
-      email: '',
-      subject: '',
-      message: ''
+      pass: ''
     };
 	},
 
-	handleSubmit: function() {
-    console.log('LoginPage.handleSubmit');
+  componentWillMount() {
+    console.log('LoginPage -> componentWillMount');
+  },
+
+  componentDidMount() {
+    console.log('LoginPage -> componentDidMount');
+  },
+
+  componentWillUnmount() {
+    console.log('LoginPage -> componentWillUnmount');
+  },
+
+  handleChange(e) {
+    console.log('LoginPage -> handleChange');
+    let newState = {};
+
+    newState[e.target.name] = e.target.value;
+    this.setState(newState);
+  },
+
+  onChange(e) {
+    let newState = {};
+    newState[e.target.name] = e.target.value;
+    this.setState(newState);
+  },
+
+  onSubmit(e) {
+    console.log('onSubmit: ' + this.state.name + '_' + this.state.pass);
     
-		var formData = {
-      formSender: this.state.name,
-      formEmail: this.state.email,
-      formSubject: this.state.subject,
-      formMessage: this.state.message
+    let request = {
+      name: this.state.name,
+      pass: this.state.pass
     };
 
-		$.ajax({
-      url: '/some/url',
-      dataType: 'json',
-      type: 'POST',
-      data: formData,
-      success: function(data) {
-        if (confirm('Thank you for your message. Can I erase the form?')) {
-          document.querySelector('.form-input').val('');
-        }
+    $.ajax({
+      url: CONSTANTS.URL_HTTPS_LOGIN,
+      type: "POST",
+      crossDomain: true,
+      data: JSON.stringify(request),
+      contentType:"application/json; charset=utf-8",
+      dataType:"json",
+      success: function(data){
+        console.log('SUCCESS');
+        console.log(data);
+
+        window.sessionStorage.setItem("token", data.token);
+        alert(window.sessionStorage.getItem("token"));
+
+        Router.browserHistory.push('file:///D:/Mira_dokumenty/Programování/webpack_02/dist/index.html');
       },
-      error: function(xhr, status, err) {
-        console.error(status, err.toString());
-        alert('There was some problem with sending your message.');
+      error: function(data) {
+        console.log('ERROR');
+        console.log(data);
       }
-    });
-    
-    this.setState({
-      firstName: '',
-      lastName: '',
-      email: '',
-      subject: '',
-      message: ''
-    });
-	},
+    });  
+  },
+
 	render: function() {
-		return (
-			<form className='react-form' onSubmit={this.handleSubmit}>
+    return (
+      <form className='react-form' onSubmit={this.onSubmit}>
         <h1>Smart Home</h1>
         <fieldset className='form-group'>
-          <ReactFormLabel htmlFor='formName' title='Full Name:' />
-
-          <input id='formName' className='form-input' name='name' type='text' ref='formName' required onChange={this.handleChange} value={this.state.name} />
+  
+          <ReactFormLabel htmlFor='nameInput' title='Name:' />
+          <input 
+            id='nameInput'
+            name='name'
+            type={'text'} 
+            value={this.state.name}
+            onChange={this.onChange}
+            required> 
+          </input>
         </fieldset>
-        
+
         <fieldset className='form-group'>
-          <ReactFormLabel htmlFor='formEmail' title='Email:' />
-
-          <input id='formEmail' className='form-input' name='email' type='email' required onChange={this.handleChange} value={this.state.email} />
+          <ReactFormLabel htmlFor='passInput' title='Password:' />
+          <input 
+            id='passInput'
+            name='pass'
+            type={'password'} 
+            value={this.state.pass}
+            onChange={this.onChange}
+            required> 
+          </input>
         </fieldset>
-        
-        <fieldset className='form-group'>
-          <ReactFormLabel htmlFor='formSubject' title='Subject:'/>
 
-          <input id='formSubject' className='form-input' name='subject' type='text' required onChange={this.handleChange} value={this.state.subject} />
-        </fieldset>
-        
-        <fieldset className='form-group'>
-          <ReactFormLabel htmlFor='formMessage' title='Message:' />
-
-          <textarea id='formMessage' className='form-textarea' name='message' required onChange={this.handleChange}></textarea>
-        </fieldset>
-        
         <div className='form-group'>
-          <input id='formButton' className='btn' type='submit' placeholder='Send message' />
+          <input 
+            id='submitInput' 
+            className='btn' 
+            type='submit' 
+            placeholder='Send message' />
         </div>
       </form>
 		)
@@ -90,9 +120,3 @@ var LoginPage = React.createClass({
 });
 
 module.exports = LoginPage;
-
-
-
-
-
-		

@@ -15,18 +15,20 @@ var Application = React.createClass({
 	requireAuth: function requireAuth(nextState, replace) {
 	  console.log('Application.requireAuth');
 	  console.log(nextState);
-	  if (false) {
-	    console.log('redirect to login');
+	  if (window.sessionStorage.getItem("token") === null) {
+	    console.log('token not found -> redirect to login');
 	    //hashHistory.push('/login');
 	    replace({
       	pathname: '/login',
       	state: { nextPathname: nextState.location.pathname }
     	})
+	  } else {
+	  	console.log('token is: ' + window.sessionStorage.getItem("token"));
 	  } 
 	}, 
 
 	render: function() {
-		console.log('Application.render');
+		console.log('Application -> render');
 
 		return (
 			<div>
