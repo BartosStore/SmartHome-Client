@@ -1,5 +1,6 @@
 var React = require('react');
-var Router = require('react-router');
+//var Router = require('react-router');
+var { Router, Route, hashHistory, IndexRoute } = require('react-router');
 
 var CONSTANTS = require('../constants.jsx');
 
@@ -69,7 +70,8 @@ var LoginPage = React.createClass({
         window.sessionStorage.setItem("token", data.token);
         alert(window.sessionStorage.getItem("token"));
 
-        Router.browserHistory.push('file:///D:/Mira_dokumenty/Programování/webpack_02/dist/index.html');
+        //Router.browserHistory.push('file:///D:/Mira_dokumenty/Programování/webpack_02/dist/index.html');
+        hashHistory.push('/welcomeboard');
       },
       error: function(data) {
         console.log('ERROR');
@@ -118,5 +120,9 @@ var LoginPage = React.createClass({
 		)
 	}
 });
+
+LoginPage.contextTypes = {
+  router: React.PropTypes.object
+};
 
 module.exports = LoginPage;
