@@ -24,6 +24,23 @@ var LoginPage = React.createClass({
 
   componentWillMount() {
     console.log('LoginPage -> componentWillMount');
+
+    $.ajax({
+      url: CONSTANTS.URL_HTTPS_ROOM_VALUES,
+      type: "GET",
+      crossDomain: true,
+      contentType:"application/json; charset=utf-8",
+      dataType:"json",
+      success: function(data){
+        console.log('SUCCESS');
+        console.log(data);
+
+      },
+      error: function(data) {
+        console.log('ERROR on client - prelogin');
+        console.log(data);
+      }
+    });
   },
 
   componentDidMount() {
@@ -67,14 +84,16 @@ var LoginPage = React.createClass({
         console.log('SUCCESS');
         console.log(data);
 
-        window.sessionStorage.setItem("token", data.token);
-        alert(window.sessionStorage.getItem("token"));
-
-        //Router.browserHistory.push('file:///D:/Mira_dokumenty/Programování/webpack_02/dist/index.html');
-        hashHistory.push('/welcomeboard');
+        if (data.token != null) {
+          window.sessionStorage.setItem("token", data.token);
+          alert("Byli jste úspěšně přihlášeni. " + window.sessionStorage.getItem("token"));
+          hashHistory.push('/welcomeboard');
+        } else {
+          alert("Došlo k chybě při prihlášení. Opakujte jej prosím.");
+        }
       },
       error: function(data) {
-        console.log('ERROR');
+        console.log('ERROR on client');
         console.log(data);
       }
     });  

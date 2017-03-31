@@ -2,10 +2,20 @@ var React = require('react');
 var Statebar = require('./statebar.jsx');
 var WelcomeBoard = require('./welcomeboard.jsx');
 
+var { Router, Route, hashHistory, IndexRoute } = require('react-router');
+var CONSTANTS = require('../constants.jsx');
+
 var Gateway = React.createClass({
+	componentWillMount: function() {
+		console.log('Gateway -> componentWillMount');
+	},
+
 	render: function() {
-		console.log('Gateway.render');
+		console.log('Gateway -> render');
+		/*
 		console.log(this.props.children);
+		console.log(this.props.route.path);
+		*/
 
 		if (this.props.children === null) {
 			return(
