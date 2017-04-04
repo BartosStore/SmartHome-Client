@@ -12,18 +12,21 @@ var BtnSquare = React.createClass({
 	},
 
 	componentWillMount() {
-		console.log("Security -> componentWillMount");
+		console.log("BtnSquare -> componentWillMount");
 		var btnId = this.props.id;
 		this.setState({id: btnId});
 	},
 
 	handleClick() {
-		console.log("Security -> componentWillMount");
+		console.log("BtnSquare -> handleClick");
     
     let request = {
       uuid: window.sessionStorage.getItem("token"),
-      id: this.state.id
+      id: this.state.id,
+      value: 0      
     };
+
+    console.log(request);
 
     $.ajax({
       url: CONSTANTS.URL_HTTPS_SQUARE_BTN,
@@ -53,7 +56,7 @@ var BtnSquare = React.createClass({
 				<p>{this.props.description}</p>
 
 				<div className="classicButton">
-					<Button bsStyle="primary" onClick={this.handleC}>Proveď</Button>
+					<Button bsStyle="primary" onClick={this.handleClick}>Proveď</Button>
 				</div>
 			</div>
 		)

@@ -44,27 +44,27 @@ var SldrSquare = React.createClass({
     });
 	},	
 
-	handleChange(value) {
-		console.log("SldrSquare -> handleChange" + value);
+	handleChange(slider) {
+		console.log("SldrSquare -> handleChange" + slider);
 	},
 
-	handleChangeComplete(value) {
-		this.setState({ value })
-		console.log("SldrSquare -> handleChangeComplete" + value);
+	handleChangeComplete(slider) {
+		//this.setState({ value })
+		console.log("SldrSquare -> handleChangeComplete" + slider);
 	},
 
 	render() {
 		return (
 			<div className="col-sm-3 col-md-3 col-lg-3 sldrSquare">
 				<p>{this.props.description}</p>
-    
+
 	      <form className="form">
 	        <InputRange
 	          maxValue={20}
 	          minValue={0}
 	          value={this.state.value}
-	          onChange={value => this.handleChange(value)}
-	          onChangeComplete={value => this.handleChange(value)} />
+	          onChange={value => this.handleChange(this)}
+	          onChangeComplete={value => this.handleChange(this)} />
 	      </form>
       </div>
 		)

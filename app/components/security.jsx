@@ -12,15 +12,7 @@ var Security = React.createClass({
 	getInitialState() {
     return {
       screenPath: '/security',
-      components: [
-			  {
-			    "id": 3,
-			    "cName": "swtch_light1",
-			    "description": "Vypínač světla - obývací pokoj",
-			    "cType": "swtch",
-			    "value": 0
-			  }
-			]
+      components: []
     };
 	},
 

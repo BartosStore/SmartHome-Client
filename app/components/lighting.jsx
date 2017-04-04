@@ -12,15 +12,7 @@ var Lighting = React.createClass({
 	getInitialState() {
     return {
       screenPath: '/lighting',
-      components: [
-			  {
-			    "id": 3,
-			    "cName": "swtch_light1",
-			    "description": "Vypínač světla - obývací pokoj",
-			    "cType": "swtch",
-			    "value": 0
-			  }
-			]
+      components: []
     };
 	},
 
@@ -98,7 +90,7 @@ var Lighting = React.createClass({
 			  )	
 		  }		  		  
 		});
-		
+
 		return (
 			<div className="container">
 			 	<div className="jumbotron">

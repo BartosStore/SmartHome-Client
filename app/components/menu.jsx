@@ -51,9 +51,8 @@ var Menu = React.createClass({
 
     $.ajax({
       url: CONSTANTS.URL_HTTPS_GET_SCREENS,
-      type: "POST",
+      type: "GET",
       crossDomain: true,
-      data: JSON.stringify(request),
       contentType:"application/json; charset=utf-8",
       dataType: "json",
       success: function(data){
