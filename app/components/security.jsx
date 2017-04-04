@@ -8,10 +8,10 @@ var InfoSquare = require('./InfoSquare.jsx');
 
 var CONSTANTS = require('../constants.jsx');
 
-var Lighting = React.createClass({
+var Security = React.createClass({
 	getInitialState() {
     return {
-      screenPath: '/lighting',
+      screenPath: '/security',
       components: [
 			  {
 			    "id": 3,
@@ -25,11 +25,11 @@ var Lighting = React.createClass({
 	},
 
 	componentWillMount() {
-		console.log("Heating -> componentWillMount");
+		console.log("Security -> componentWillMount");
     
     let request = {
       uuid: "test",
-      path: "/lighting"
+      path: "/security"
     };
 
     console.log("request: " + request + "/nurl: " + CONSTANTS.URL_HTTPS_GET_COMPONENTS);
@@ -113,4 +113,4 @@ var Lighting = React.createClass({
 	}
 });
 
-module.exports = Lighting;
+module.exports = Security;

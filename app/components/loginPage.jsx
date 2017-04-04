@@ -25,22 +25,6 @@ var LoginPage = React.createClass({
   componentWillMount() {
     console.log('LoginPage -> componentWillMount');
 
-    $.ajax({
-      url: CONSTANTS.URL_HTTPS_ROOM_VALUES,
-      type: "GET",
-      crossDomain: true,
-      contentType:"application/json; charset=utf-8",
-      dataType:"json",
-      success: function(data){
-        console.log('SUCCESS');
-        console.log(data);
-
-      },
-      error: function(data) {
-        console.log('ERROR on client - prelogin');
-        console.log(data);
-      }
-    });
   },
 
   componentDidMount() {

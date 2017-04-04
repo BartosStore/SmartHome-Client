@@ -1,6 +1,5 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-//var { Router, Route, Link, hashHistory, IndexRoute } = require('react-router');
 var { Router, Route, hashHistory, IndexRoute } = require('react-router');
 var CONSTANTS = require('./constants.jsx');
 
@@ -8,6 +7,7 @@ var Gateway = require('gateway.jsx');
 var Welcomeboard = require('./components/welcomeboard.jsx');
 var Heating = require('./components/heating.jsx');
 var Lighting = require('./components/lighting.jsx');
+var Security = require('./components/security.jsx');
 
 var LoginPage = require('./components/loginPage.jsx');
 var NotFound = require('./components/notFound.jsx');
@@ -91,6 +91,7 @@ var Application = React.createClass({
 		      	<Route path="welcomeboard" component={Welcomeboard} onEnter={this.checkPermission} />
 			  	  <Route path="heating" component={Heating} onEnter={this.checkPermission} />
 			      <Route path="lighting" component={Lighting} onEnter={this.checkPermission} />
+			      <Route path="security" component={Security} onEnter={this.checkPermission} />
 			    </Route>
 			    <Route path="*" component={NotFound} />
 				</Router>

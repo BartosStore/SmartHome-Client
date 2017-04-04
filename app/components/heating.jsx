@@ -1,23 +1,116 @@
 var React = require('react');
 var { Router, Route, hashHistory, IndexRoute } = require('react-router');
 
+var BtnSquare = require('./BtnSquare.jsx');
+var SldrSquare = require('./SldrSquare.jsx');
+var SwtchSquare = require('./SwtchSquare.jsx');
+var InfoSquare = require('./InfoSquare.jsx');
+
 var CONSTANTS = require('../constants.jsx');
 
 var Heating = React.createClass({
+	getInitialState() {
+    return {
+      screenPath: '/heating',
+      components: []
+    };
+	},
+
 	componentWillMount() {
-		//console.log("heating -> path: " + this.props.route.path);
+		console.log("Heating -> componentWillMount");
+    
+    let request = {
+      uuid: "test",
+      path: "/heating"
+    };
+
+    console.log("request: " + request + "/nurl: " + CONSTANTS.URL_HTTPS_GET_COMPONENTS);
+
+    $.ajax({
+      url: CONSTANTS.URL_HTTPS_GET_COMPONENTS,
+      type: "POST",
+      crossDomain: true,
+      data: JSON.stringify(request),
+      contentType:"application/json; charset=utf-8",
+      dataType: "json",
+      success: function(data){
+        console.log('SUCCESS');
+        console.log(data);
+
+        this.setState({components: data});
+      }.bind(this),
+      error: function(data) {
+        console.log('ERROR on components call');
+        console.log(data);
+      }
+    });
+	},
+
+	componentDidMount() {
+		console.log("Heating -> componentDidMount");
+
+	},
+
+	componentWillUnmount() {
+		console.log("Heating -> componentWillUnmount");
 
 	},
 
 	render: function() {
+		var squares = this.state.components.map(function(item, i){
+		  //return <li key={i}>{item.cName}</li>
+		  
+		  if (item.cType === "btn") {
+		  	console.log("btn rendering");	
+		  	return (
+			  	<BtnSquare
+			  		key={i}
+			  		id={item.id}
+			  		cName={item.cName}
+			  		value={item.value}
+			  		description={item.description} />
+			  )
+		  } else if (item.cType === "sldr") {
+		  	console.log("sldr rendering");	
+		  	return (
+			  	<SldrSquare
+			  		key={i}
+			  		id={item.id}
+			  		cName={item.cName}
+			  		value={item.value}
+			  		description={item.description} />
+			  )
+		  } else if (item.cType === "swtch") {
+		  	console.log("swtch rendering");	
+		  	return (
+			  	<SwtchSquare
+			  		key={i}
+			  		id={item.id}
+			  		cName={item.cName}
+			  		value={item.value}
+			  		description={item.description} />
+			  )	
+		  } else if (item.cType === "info") {
+		  	console.log("info rendering");	
+		  	return (
+			  	<InfoSquare
+			  		key={i}
+			  		id={item.id}
+			  		cName={item.cName}
+			  		value={item.value}
+			  		description={item.description} />
+			  )	
+		  }		  		  
+		});
+
 		return (
 			<div className="container">
 			 	<div className="jumbotron">
-			 		This is heating!
-			 	</div>
-
-			 	<div className="row">
-			 		This is heating!
+			 		<div className="row">
+			 			<div className="col-sm-12 col-md-12 col-lg-12 squares">
+				 			{squares}
+				 		</div>
+				 	</div>
 			 	</div>
 			</div>
 		 )

@@ -8,6 +8,7 @@ var StateBar = React.createClass({
 					<li><a href="./index.html#/">Welcomeboard</a></li>
 					<li><a href="./index.html#/heating">Heating</a></li>
 					<li><a href="./index.html#/lighting">Lighting</a></li>
+					<li><a href="./index.html#/security">Security</a></li>
 
 					<li><a href="./index.html#/login">Login</a></li>
 				</ul>

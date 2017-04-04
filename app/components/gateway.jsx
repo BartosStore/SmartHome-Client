@@ -1,8 +1,9 @@
 var React = require('react');
 var Statebar = require('./statebar.jsx');
+var { Router, Route, hashHistory, IndexRoute } = require('react-router');
+
 var WelcomeBoard = require('./welcomeboard.jsx');
 
-var { Router, Route, hashHistory, IndexRoute } = require('react-router');
 var CONSTANTS = require('../constants.jsx');
 
 var Gateway = React.createClass({
