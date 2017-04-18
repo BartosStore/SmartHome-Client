@@ -1,20 +1,20 @@
 var React = require('react');
-var { Router, Route, hashHistory, IndexRoute } = require('react-router');
+var { Router, Route, hashHistory, IndexRoute, Link } = require('react-router');
 
 var CONSTANTS = require('../constants.jsx');
 
 var MenuSquare = React.createClass({	
-	render() {
+	redirect: function() {
+		console.log("MenuSquare -> redirect()");
+	},
+
+	render: function() {
 		return (
-			<div className="col-sm-4 col-md-4 col-lg-4 menuSquare">
-				<div className='form-group'>
-          <input 
-            id='menuSubmit' 
-            className='btn' 
-            type='submit' 
-            placeholder='test' />
-        </div>
-			</div>
+			<Link to={this.props.url}>
+				<div className="col-sm-4 col-md-4 col-lg-4 menuSquare">
+					<p>{this.props.sName}</p>
+				</div>
+			</Link>
 		)
 	}
 });	
@@ -25,28 +25,14 @@ var Menu = React.createClass({
 
 		return {
       screenPath: '/security',
-      components: [
-			  {
-			    "id": 3,
-			    "cName": "swtch_light1",
-			    "description": "Vypínač světla - obývací pokoj",
-			    "cType": "swtch",
-			    "value": 0
-			  }
-			]
+      components: []
 		};		
 	},
 
-	componentDidMount: function() {
-		console.log("Menu -> componentDidMount");
-	},
-
-	componentWillUnmount: function() {
-		console.log("Menu -> componentWillMount");
-
+	componentWillMount: function() {
     let request = {
       uuid: "test",
-      path: "/security"
+      path: "menu"
     };
 
     $.ajax({
@@ -68,14 +54,26 @@ var Menu = React.createClass({
     });
 	},
 
+	componentDidMount: function() {
+		console.log("Menu -> componentDidMount");
+	},
+
+	componentWillUnmount: function() {
+		console.log("Menu -> componentWillMount");
+
+	},
+
 	render: function() {
 		var squares = this.state.components.map(function(item, i){
-	  	return (
-		  	<MenuSquare
-		  		key={i}
-		  		id={item.id}
-		  		sName={item.sName} />
-		  )
+			if (item.id !== 1) {
+		  	return (
+			  	<MenuSquare
+			  		key={i}
+			  		id={item.id}
+			  		sName={item.sName}
+			  		url={item.url} />
+			  )
+		  }
 		});
 
 		return (
