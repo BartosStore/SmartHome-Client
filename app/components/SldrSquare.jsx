@@ -1,6 +1,7 @@
 var React = require('react');
 var { Router, Route, hashHistory, IndexRoute } = require('react-router');
 var InputRange = require('react-input-range');
+//var ReactBootstrapSlider = require("react-bootstrap-slider");
 
 var CONSTANTS = require('../constants.jsx');
 
@@ -8,22 +9,28 @@ var SldrSquare = React.createClass({
 	getInitialState() {
     return {
     	id: 0,
-    	value: 10
+    	value: 20
     };
 	},
 
 	componentWillMount() {
 		console.log("SldrSquare -> componentWillMount");
-		var swtchId = this.props.id;
-		this.setState({id: swtchId});
+		let swtchId = this.props.id;
+		let swtchValue = this.props.value;
+
+		this.setState({
+			id: swtchId,
+			value: swtchValue
+		});
 	},
 
-	handleClick() {
+	handleClick(value) {
 		console.log("SldrSquare -> componentWillMount");
     
     let request = {
       uuid: window.sessionStorage.getItem("token"),
-      id: this.state.id
+      id: this.state.id,
+      value: value
     };
 
     $.ajax({
@@ -42,30 +49,24 @@ var SldrSquare = React.createClass({
         console.log(data);
       }
     });
+
+    this.setState({
+      value: value,
+    });
 	},	
-
-	handleChange(slider) {
-		console.log("SldrSquare -> handleChange" + slider);
-	},
-
-	handleChangeComplete(slider) {
-		//this.setState({ value })
-		console.log("SldrSquare -> handleChangeComplete" + slider);
-	},
 
 	render() {
 		return (
-			<div className="col-sm-3 col-md-3 col-lg-3 sldrSquare">
-				<p>{this.props.description}</p>
+			<div className="col-sm-4 col-md-4 col-lg-4 sldrSquare">
+				<p className="action-square-desc">{this.props.description}</p>
 
-	      <form className="form">
-	        <InputRange
-	          maxValue={20}
-	          minValue={0}
-	          value={this.state.value}
-	          onChange={value => this.handleChange(this)}
-	          onChangeComplete={value => this.handleChange(this)} />
-	      </form>
+				<div className="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+					<InputRange
+		        minValue={16}
+		        maxValue={28}
+		        value={this.state.value}
+		        onChange={this.handleClick} />
+	       </div>
       </div>
 		)
 	}

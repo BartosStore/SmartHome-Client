@@ -82,6 +82,7 @@ var Application = React.createClass({
 
 	render: function() {
 		console.log('Application -> render');
+		//<Route path="heating" component={Heating} onEnter={this.checkPermission} />
 
 		return (
 			<div>

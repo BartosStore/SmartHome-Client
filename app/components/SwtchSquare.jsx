@@ -7,7 +7,7 @@ var CONSTANTS = require('../constants.jsx');
 var X = React.createClass({
 	render() {
 		return (	
-			<p>X</p>
+			<span>X</span>
 		)
 	}
 });
@@ -15,7 +15,7 @@ var X = React.createClass({
 var Check = React.createClass({
 	render() {
 		return (	
-			<p>OK</p>
+			<span>OK</span>
 		)
 	}
 });
@@ -30,16 +30,39 @@ var SwtchSquare = React.createClass({
 
 	componentWillMount() {
 		console.log("Security -> componentWillMount");
-		var swtchId = this.props.id;
-		this.setState({id: swtchId});
+		let swtchId = this.props.id;
+		let swtchValue;
+		
+		if (this.props.value === 1) {
+			swtchValue = true;
+		} else {
+			swtchValue = false;
+		}
+
+		this.setState({
+			id: swtchId, 
+			value: swtchValue
+		});
 	},
 
-	handleClick() {
+	handleClick(value) {
 		console.log("Security -> componentWillMount");
+		let tempValue;
+
+		this.setState({
+      value: !value,
+    });
+
+    if (this.state.value === true) {
+			tempValue = 0;
+		} else {
+			tempValue = 1;
+		}
     
     let request = {
       uuid: window.sessionStorage.getItem("token"),
-      id: this.state.id
+      id: this.state.id,
+      value: tempValue
     };
 
     $.ajax({
@@ -62,7 +85,7 @@ var SwtchSquare = React.createClass({
 
 	handleC(value) {
 		console.log("click");
-		console.log(value);
+		console.log(!value);
 		this.setState({
       value: !value,
     });
@@ -71,38 +94,16 @@ var SwtchSquare = React.createClass({
 	render() {
 		console.log("props: " + this.props);
 		return (
-			<div className="col-sm-3 col-md-3 col-lg-3 swtchSquare">
-				<p>{this.props.description}</p>
+			<div className="col-sm-4 col-md-4 col-lg-4 swtchSquare">
+				<p className="action-square-desc">{this.props.description}</p>
 
 				<div className="toggleButton">
 					<ToggleButton 
-						inactiveLabel={<i className="fa fa-times"></i>}
-					  activeLabel={<i className="fa fa-check"></i>}
-						value={this.state.value} 
-						containerStyle={{display:'inline-block',width:'100px'}} 
-						trackStyle={{width:'100px'}} 
-						thumbAnimateRange={[1, 80]} 
-						activeLabelStyle={{ width:'50px' }} 
-						inactiveLabelStyle={{ width:'50px' }}
-					  colors={{
-					    activeThumb: {
-					      base: 'rgb(250,250,250)',
-					    },
-					    inactiveThumb: {
-					      base: 'rgb(62,130,247)',
-					    },
-					    active: {
-					      base: '#428bca',
-					      hover: 'rgb(91,192,222)',
-					    },
-					    inactive: {
-					      base: 'rgb(65,66,68)',
-					      hover: 'rgb(95,96,98)',
-					    }
-					  }}
-						onToggle={(value) => {							
-					    {this.handleC(value)}
-					  }} />
+					  value={this.state.value}
+					  inactiveLabel={<X/>}
+					  activeLabel={<Check/>}
+
+					  onToggle={this.handleClick} />
 				</div>
 			</div>
 		)

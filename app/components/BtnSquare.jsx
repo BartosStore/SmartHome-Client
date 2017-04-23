@@ -52,8 +52,8 @@ var BtnSquare = React.createClass({
 
 	render() {
 		return (
-			<div className="col-sm-3 col-md-3 col-lg-3 btnSquare">
-				<p>{this.props.description}</p>
+			<div className="col-sm-4 col-md-4 col-lg-4 btnSquare">
+				<p className="action-square-desc">{this.props.description}</p>
 
 				<div className="classicButton">
 					<Button bsStyle="primary" onClick={this.handleClick}>Proveď</Button>

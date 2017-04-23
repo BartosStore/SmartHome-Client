@@ -1,7 +1,31 @@
 var React = require('react');
+var Carousel = require('nuka-carousel');
+var PrimaryButton = require('primaryButton.jsx');
+
 var CONSTANTS = require('../constants.jsx');
 
-var PrimaryButton = require('primaryButton.jsx');
+var CarouselMember = React.createClass({
+	render: function() {
+		return(
+			<div className="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 carousel-member">
+				<row>
+					<div className="col-sm-12 col-md-12 col-lg-12 carousel-text">
+						<p className="carousel-text-border">{this.props.text}</p>
+					</div>
+				</row>
+				<row>
+					<div className="col-sm-12 col-md-12 col-lg-12 carousel-main">
+						<i className={this.props.icon} aria-hidden="true"></i>
+						<span className="carousel-value">
+							&nbsp;{this.props.value}{this.props.unit}
+						</span>
+					</div>
+				</row>
+			</div>
+		)
+	}
+});
+
 
 var Jumbotron = React.createClass({
 	getInitialState: function() {
@@ -42,16 +66,15 @@ var Jumbotron = React.createClass({
 		console.log("state-name: " + this.state.name);
 
 		return (
-			<div className="col-md-8 jumbo">
-				<div className="jumbotron">
-	        <h2>{this.props.mainText}</h2>
-
-	        <p>Přehled teplot a vlhkosti</p>
-         	<p> {this.state.name}: teplota {this.state.temp} C, vlhkost: {this.state.humi} % </p>
-
-	        <PrimaryButton buttonText='Upravit vytápění'/>
-			  </div>
-		 	</div>
+			<div className="col-sm-8 col-md-8 col-lg-8">
+			<div className="col-sm-12 col-md-12 col-lg-12 jumbo">
+				<Carousel>
+	        <CarouselMember text="Venkovní teplota" value="18" unit="°C" icon="fa fa-thermometer-full" />
+	        <CarouselMember text="Obývací pokoj - teplota" value="23" unit="°C" icon="fa fa-thermometer-full" />
+	        <CarouselMember text="Obývací pokoj - vlhkost" value="64" unit="%" icon="fa fa-cloud" />
+				</Carousel>
+			</div>
+			</div>
 		 )
 	}
 });

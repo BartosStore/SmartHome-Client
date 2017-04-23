@@ -9,9 +9,14 @@ var MenuSquare = React.createClass({
 	},
 
 	render: function() {
+		//<Link to={{ pathname: this.props.url, query: { screen: this.props.url } }}>
+		//<i className="fa fa-lightbulb-o" aria-hidden="true"></i>
+		//<i className={this.props.icon} />
+
 		return (
-			<Link to={this.props.url}>
+			<Link to={{ pathname: this.props.url }}>
 				<div className="col-sm-4 col-md-4 col-lg-4 menuSquare">
+					<i className={this.props.icon} />
 					<p>{this.props.sName}</p>
 				</div>
 			</Link>
@@ -60,7 +65,6 @@ var Menu = React.createClass({
 
 	componentWillUnmount: function() {
 		console.log("Menu -> componentWillMount");
-
 	},
 
 	render: function() {
@@ -71,14 +75,26 @@ var Menu = React.createClass({
 			  		key={i}
 			  		id={item.id}
 			  		sName={item.sName}
-			  		url={item.url} />
+			  		url={item.url}
+			  		icon={item.icon} />
+			  )
+		  } else {
+		  	return (
+			  	<MenuSquare
+				  		key={i}
+				  		id={item.id}
+				  		sName="Login"
+				  		url="/login"
+				  		icon={item.icon} />
 			  )
 		  }
 		});
 
 		return (
  			<div className="col-sm-8 col-md-8 col-lg-8 squares">
-	 			{squares}
+ 				<div className="top-line">
+	 				{squares}
+	 			</div>
 	 		</div>
 		)
 	}

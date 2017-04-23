@@ -14,7 +14,7 @@ var Welcomeboard = React.createClass({
 				<div className="row"> 
 					<Jumbotron mainText='Jumbotron' />
 
-					<Logger imageUrl={CONSTANTS.image} />
+					<Logger />
 				</div>
 
 				<div className="row">

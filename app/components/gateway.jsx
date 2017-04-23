@@ -13,8 +13,8 @@ var Gateway = React.createClass({
 
 	render: function() {
 		console.log('Gateway -> render');
-		/*
 		console.log(this.props.children);
+		/*
 		console.log(this.props.route.path);
 		*/
 
