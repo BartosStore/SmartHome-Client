@@ -55,12 +55,22 @@ var BtnSquare = React.createClass({
 			<div className="col-sm-4 col-md-4 col-lg-4 btnSquare">
 				<p className="action-square-desc">{this.props.description}</p>
 
-				<div className="classicButton">
-					<Button bsStyle="primary" onClick={this.handleClick}>Proveď</Button>
-				</div>
+        <input 
+            id='submitInput' 
+            className='btn' 
+            type='submit' 
+            value="Proveď"
+            placeholder='Send message' />
 			</div>
 		)
 	}
 });	
 
 module.exports = BtnSquare;
+
+/*
+
+        <div className="classicButton">
+          <Button bsStyle="primary" onClick={this.handleClick}>Proveď</Button>
+        </div>
+*/        

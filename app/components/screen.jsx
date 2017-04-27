@@ -21,7 +21,6 @@ var Screen = React.createClass({
 		console.log("Screen -> componentWillMount");
 		console.log("path: " + this.props.path);
 
-		//this.state.screenPath
 		this.setState({
 			screenPath: this.props.path,
 		});
@@ -65,8 +64,6 @@ var Screen = React.createClass({
 
 	render: function() {
 		var squares = this.state.components.map(function(item, i){
-		  //return <li key={i}>{item.cName}</li>
-		  
 		  if (item.cType === "btn") {
 		  	console.log("btn rendering");	
 		  	return (

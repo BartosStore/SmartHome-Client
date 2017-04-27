@@ -1,5 +1,4 @@
 var React = require('react');
-//var Router = require('react-router');
 var { Router, Route, hashHistory, IndexRoute } = require('react-router');
 
 var CONSTANTS = require('../constants.jsx');
@@ -86,7 +85,7 @@ var LoginPage = React.createClass({
 	render: function() {
     return (
       <form className='react-form' onSubmit={this.onSubmit}>
-        <h1>Smart Home</h1>
+        <h1 className="login-h">Smart Home</h1>
         <fieldset className='form-group'>
   
           <ReactFormLabel htmlFor='nameInput' title='Name:' />

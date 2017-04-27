@@ -1,7 +1,6 @@
 var React = require('react');
 var { Router, Route, hashHistory, IndexRoute } = require('react-router');
 var InputRange = require('react-input-range');
-//var ReactBootstrapSlider = require("react-bootstrap-slider");
 
 var CONSTANTS = require('../constants.jsx');
 
@@ -60,7 +59,7 @@ var SldrSquare = React.createClass({
 			<div className="col-sm-4 col-md-4 col-lg-4 sldrSquare">
 				<p className="action-square-desc">{this.props.description}</p>
 
-				<div className="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+				<div className="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 slider">
 					<InputRange
 		        minValue={16}
 		        maxValue={28}
